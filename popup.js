@@ -24,6 +24,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     target: { tabId: tab.id },
     function: setPageBackgroundColor,
   });
+// When the body is clicked, inject setPageBackgroundColor into current page
+changeColor.addEventListener('click', async () => {
+
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+
+  if (str_match_reg(tab.url, individual_rank_regex)) {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: navigate_rank,
+    });
+  } else if (str_match_reg(tab.url, multiple_rank_regex)) {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: navigate_view_rank,
+    });
+  }
+
 });
 
 // The body of this function will be executed as a content script inside the current page
