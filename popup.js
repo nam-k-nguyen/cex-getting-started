@@ -24,6 +24,20 @@ function setPageBackgroundColor() {
   chrome.storage.sync.get("color", ({ color }) => {
     document.body.style.backgroundColor = color;
   });
+
+
+// Content script in view rank page
+function navigate_view_rank() {
+  console.log("inside navigate_view_rank fn")
+
+  let firstButton = document.querySelector('td>a.btn.btn-danger')
+  firstButton.click();
+
+  chrome.storage.sync.get("repeat", ({ repeat }) => {
+    console.log(repeat)
+  })
+}
+
 // Content script in rank page
 function navigate_rank() {
   console.log("inside navigate_rank fn")
