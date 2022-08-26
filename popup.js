@@ -24,4 +24,8 @@ function setPageBackgroundColor() {
   chrome.storage.sync.get("color", ({ color }) => {
     document.body.style.backgroundColor = color;
   });
+// Function to match a String to a RegExp, returns true if match
+function str_match_reg(str, reg) {
+  if (typeof (str) !== 'string' || !reg instanceof RegExp) return false
+  return str.match(reg) == str
 }
