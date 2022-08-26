@@ -1,4 +1,9 @@
 let changeColor = document.getElementById('changeColor');
+let rankRepeat = document.querySelector('#rank-repeat');
+
+const individual_rank_regex = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/Rank.*/g
+const multiple_rank_regex = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/ViewRank.*/g
+
 
 chrome.storage.sync.get("color", ({ color }) => {
   changeColor.style.backgroundColor = color;
