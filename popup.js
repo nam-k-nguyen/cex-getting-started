@@ -12,6 +12,13 @@ chrome.storage.sync.get("color", ({ color }) => {
 // When the body is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+document.addEventListener('DOMContentLoaded', async () => {
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true }).then((tab) => {
+    alert(tab[0].url)
+    return tab;
+  });
+  alert('booba')
+})
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
