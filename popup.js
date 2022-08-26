@@ -24,6 +24,23 @@ function setPageBackgroundColor() {
   chrome.storage.sync.get("color", ({ color }) => {
     document.body.style.backgroundColor = color;
   });
+// Content script in rank page
+function navigate_rank() {
+  console.log("inside navigate_rank fn")
+
+  let veryInterested = document.querySelector('.RadioButton>#PositionRankId_2');
+  veryInterested.click();
+  let saveButton = document.querySelector('button#saveButton');
+  let cancelButton = document.querySelector('button[value=cancel]');
+  cancelButton.click();
+  // saveButton.click();
+  chrome.storage.sync.get("repeat", ({ repeat }) => {
+    console.log(repeat)
+  })
+}
+
+
+
 // Function to match a String to a RegExp, returns true if match
 function str_match_reg(str, reg) {
   if (typeof (str) !== 'string' || !reg instanceof RegExp) return false
