@@ -55,6 +55,20 @@ plus.addEventListener('click', async () => {
 start.addEventListener('click', async () => {
 
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+
+  // if (str_match_reg(tab.url, INDIVIDUAL_RANK_REGEX)) {
+  //   chrome.scripting.executeScript({
+  //     target: { tabId: tab.id },
+  //     function: navigate_rank,
+  //   });
+  // }
+  // else if (str_match_reg(tab.url, MULTIPLE_RANK_REGEX)) {
+  //   chrome.scripting.executeScript({
+  //     target: { tabId: tab.id },
+  //     function: navigate_view_rank,
+  //   });
+  // }
+
   chrome.storage.sync.set({ debug_text: 'START' })
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
@@ -119,4 +133,6 @@ function navigate_rank() {
 function str_match_reg(str, reg) {
   if (typeof (str) !== 'string' || !reg instanceof RegExp) return false
   return str.match(reg) == str
+}
+
 
