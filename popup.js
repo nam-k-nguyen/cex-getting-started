@@ -18,9 +18,6 @@ const LOWER_LIMIT = 1;
 const UPPER_LIMIT = 30;
 
 
-// When the body is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener('click', async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 document.addEventListener('DOMContentLoaded', async () => {
   chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
     repeat.innerText = repeat_number;
