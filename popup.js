@@ -17,9 +17,6 @@ const MULTIPLE_RANK_REGEX = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\
 const LOWER_LIMIT = 1;
 const UPPER_LIMIT = 30;
 
-chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-})
 
 // When the body is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener('click', async () => {
