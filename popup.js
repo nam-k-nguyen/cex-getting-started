@@ -1,9 +1,21 @@
-let changeColor = document.getElementById('changeColor');
-let rankRepeat = document.querySelector('#rank-repeat');
+// ---------
+// VARIABLES
+// ---------
 
-const individual_rank_regex = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/Rank.*/g
-const multiple_rank_regex = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/ViewRank.*/g
+// Elements from the popup miniscreen
+let repeat = document.getElementById('repeat');
+let minus = document.getElementById('minus');
+let plus = document.getElementById('plus');
+let start = document.getElementById('start');
+let stop = document.getElementById('stop');
 
+// Regular expression for related pages
+const INDIVIDUAL_RANK_REGEX = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/Rank.*/g
+const MULTIPLE_RANK_REGEX = /https:\/\/webapps2.uc.edu\/elce\/Student\/Position\/ViewRank.*/g
+
+// Limit for the number of ranking repeat
+const LOWER_LIMIT = 1;
+const UPPER_LIMIT = 30;
 
 chrome.storage.sync.get("color", ({ color }) => {
   changeColor.style.backgroundColor = color;
