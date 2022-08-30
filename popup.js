@@ -59,6 +59,13 @@ function setPageBackgroundColor() {
   });
 
 
+// Content script for debugging
+function debug() {
+  chrome.storage.sync.get("debug_text", ({ debug_text }) => {
+    console.log(`%c ${debug_text} `, 'background: #555; color: #bada55');
+  })
+}
+
 // Content script in view rank page
 function navigate_view_rank() {
   console.log("inside navigate_view_rank fn")
