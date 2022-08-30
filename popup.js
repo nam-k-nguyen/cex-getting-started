@@ -38,27 +38,30 @@ plus.addEventListener('click', async () => {
     repeat.innerText = updated_repeat_number;
   })
 })
+start.addEventListener('click', async () => {
+
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  chrome.storage.sync.set({ debug_text: 'START' })
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: setPageBackgroundColor,
+    function: debug,
   });
 // When the body is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener('click', async () => {
+});
 
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+stop.addEventListener('click', async () => {
 
   if (str_match_reg(tab.url, individual_rank_regex)) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: navigate_rank,
-    });
-  } else if (str_match_reg(tab.url, multiple_rank_regex)) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: navigate_view_rank,
-    });
-  }
+  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
 
+  chrome.storage.sync.set({ debug_text: 'STOP' })
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: debug,
+  });
 });
 
 // The body of this function will be executed as a content script inside the current page
