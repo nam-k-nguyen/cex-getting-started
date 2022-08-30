@@ -18,43 +18,53 @@ const LOWER_LIMIT = 1;
 const UPPER_LIMIT = 30;
 
 
+// ---------------
+// EVENT LISTENERS
+// ---------------
+
+// Run right after popup is fully loaded
 document.addEventListener('DOMContentLoaded', async () => {
   chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
     repeat.innerText = repeat_number;
   })
 })
 
+// Run when user click decrement
 minus.addEventListener('click', async () => {
   chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
+    // Doesn't update repeat number if it's at the lower limit
     updated_repeat_number = repeat_number <= LOWER_LIMIT ? LOWER_LIMIT : repeat_number - 1;
+    // Update repeat number in storage and popup display
     chrome.storage.sync.set({ repeat_number: updated_repeat_number })
     repeat.innerText = updated_repeat_number;
   })
 })
+
+// Run when user click increment
 plus.addEventListener('click', async () => {
   chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
+    // Doesn't update repeat number if it's at the upper limit
     updated_repeat_number = repeat_number >= UPPER_LIMIT ? UPPER_LIMIT : repeat_number + 1;
+    // Update repeat number in storage and popup display
     chrome.storage.sync.set({ repeat_number: updated_repeat_number })
     repeat.innerText = updated_repeat_number;
   })
 })
+
+// Run when user click start
 start.addEventListener('click', async () => {
 
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
   chrome.storage.sync.set({ debug_text: 'START' })
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: setPageBackgroundColor,
     function: debug,
   });
-// When the body is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener('click', async () => {
 });
 
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+// Run when user click stop
 stop.addEventListener('click', async () => {
 
-  if (str_match_reg(tab.url, individual_rank_regex)) {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
 
   chrome.storage.sync.set({ debug_text: 'STOP' })
@@ -64,11 +74,10 @@ stop.addEventListener('click', async () => {
   });
 });
 
-// The body of this function will be executed as a content script inside the current page
-function setPageBackgroundColor() {
-  chrome.storage.sync.get("color", ({ color }) => {
-    document.body.style.backgroundColor = color;
-  });
+
+// -------------- 
+// CONTENT SCRIPT 
+// --------------
 
 
 // Content script for debugging
@@ -106,9 +115,8 @@ function navigate_rank() {
 }
 
 
-
 // Function to match a String to a RegExp, returns true if match
 function str_match_reg(str, reg) {
   if (typeof (str) !== 'string' || !reg instanceof RegExp) return false
   return str.match(reg) == str
-}
+
