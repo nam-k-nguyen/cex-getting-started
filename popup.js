@@ -24,6 +24,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   })
 })
 
+minus.addEventListener('click', async () => {
+  chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
+    updated_repeat_number = repeat_number <= LOWER_LIMIT ? LOWER_LIMIT : repeat_number - 1;
+    chrome.storage.sync.set({ repeat_number: updated_repeat_number })
+    repeat.innerText = updated_repeat_number;
+  })
+})
+plus.addEventListener('click', async () => {
+  chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
+    updated_repeat_number = repeat_number >= UPPER_LIMIT ? UPPER_LIMIT : repeat_number + 1;
+    chrome.storage.sync.set({ repeat_number: updated_repeat_number })
+    repeat.innerText = updated_repeat_number;
+  })
+})
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: setPageBackgroundColor,
