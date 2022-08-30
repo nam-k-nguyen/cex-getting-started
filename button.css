@@ -1,13 +1,41 @@
 button {
-  height: 30px;
-  width: 30px;
   outline: none;
-  margin: 10px;
   border: none;
+  height: 30px;
+  margin: 0px;
   border-radius: 2px;
+  width: 50%;
 }
 
-button.current {
-  box-shadow: 0 0 0 2px white
-              0 0 0 4px black;
+div.increment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div#repeat {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button#minus, button#plus {
+  width: 30%;
+}
+
+div.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button#start {
+  background: red;
+}
+
+button#stop {
+  background: green;
 }
