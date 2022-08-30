@@ -22,11 +22,9 @@ const UPPER_LIMIT = 30;
 changeColor.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 document.addEventListener('DOMContentLoaded', async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true }).then((tab) => {
-    alert(tab[0].url)
-    return tab;
-  });
-  alert('booba')
+  chrome.storage.sync.get("repeat_number", ({ repeat_number }) => {
+    repeat.innerText = repeat_number;
+  })
 })
 
   chrome.scripting.executeScript({
